@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "run_id": "2acdbb0990a84ce7879e454904fa2c44",
+  "agent_version": "0.1.0",
+  "started_at": "2026-11-09T00:40:26.418392Z",
+  "input": "Look up product SKU-123",
+  "mode": "record",
+  "events": [
+    {
+      "seq": 1,
+      "type": "llm.call",
+      "timestamp": "2026-11-09T00:40:26.418445Z",
+      "request": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "Look up product SKU-123"
+          }
+        ]
+      },
+      "response": {
+        "tool_calls": [
+          {
+            "id": "call-001",
+            "name": "catalog.lookup",
+            "arguments": {
+              "sku": "SKU-123"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "seq": 2,
+      "type": "agent.decision",
+      "timestamp": "2026-11-09T00:40:26.418600Z",
+      "decision": "call_tool",
+      "tool": "catalog.lookup"
+    },
+    {
+      "seq": 3,
+      "type": "tool.call",
+      "timestamp": "2026-11-09T00:40:26.418615Z",
+      "request": {
+        "name": "catalog.lookup",
+        "arguments": {
+          "sku": "SKU-123"
+        }
+      },
+      "response": {
+        "status": "ok",
+        "data": {
+          "sku": "SKU-123",
+          "available": true
+        }
+      }
+    },
+    {
+      "seq": 4,
+      "type": "agent.decision",
+      "timestamp": "2026-11-09T00:40:26.418646Z",
+      "decision": "finish",
+      "outcome": "success"
+    }
+  ]
+}

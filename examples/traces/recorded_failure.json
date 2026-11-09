@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "run_id": "f0f1265e66e5458082bfd517f2502606",
+  "agent_version": "0.1.0",
+  "started_at": "2026-11-09T00:42:49.716397Z",
+  "input": "Look up product SKU-123",
+  "mode": "record",
+  "events": [
+    {
+      "seq": 1,
+      "type": "llm.call",
+      "timestamp": "2026-11-09T00:42:49.716441Z",
+      "request": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "Look up product SKU-123"
+          }
+        ]
+      },
+      "response": {
+        "tool_calls": [
+          {
+            "id": "call-001",
+            "name": "catalog.lookup",
+            "arguments": {
+              "sku": "SKU-123"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "seq": 2,
+      "type": "agent.decision",
+      "timestamp": "2026-11-09T00:42:49.716509Z",
+      "decision": "call_tool",
+      "tool": "catalog.lookup"
+    },
+    {
+      "seq": 3,
+      "type": "tool.call",
+      "timestamp": "2026-11-09T00:42:49.716522Z",
+      "request": {
+        "name": "catalog.lookup",
+        "arguments": {
+          "sku": "SKU-123"
+        }
+      },
+      "response": {
+        "status": "error",
+        "error": {
+          "code": "INVALID_RESPONSE",
+          "message": "Simulated malformed catalog response",
+          "retryable": false
+        }
+      }
+    },
+    {
+      "seq": 4,
+      "type": "agent.decision",
+      "timestamp": "2026-11-09T00:42:49.716575Z",
+      "decision": "fail_fast",
+      "outcome": "failure"
+    }
+  ]
+}

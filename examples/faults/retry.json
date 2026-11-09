@@ -1,0 +1,12 @@
+{
+  "target_seq": 3,
+  "event_type": "tool.call",
+  "replacement_response": {
+    "status": "error",
+    "error": {
+      "code": "SERVICE_UNAVAILABLE",
+      "message": "Simulated HTTP 503",
+      "retryable": true
+    }
+  }
+}

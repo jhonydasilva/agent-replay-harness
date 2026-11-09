@@ -1,0 +1,28 @@
+name: CI
+on:
+  push:
+  pull_request:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Create clean virtual environment
+        run: python -m venv .venv
+      - name: Install development dependencies
+        run: make setup
+      - name: Check source formatting and imports
+        run: make lint
+      - name: Run tests
+        run: make test
+      - name: Run offline demonstration
+        run: make demo
+      - name: Generate measured results
+        run: make bench
